@@ -1,3 +1,3 @@
-module github.com/aethedigm/ipban
+module github.com/Aethedigm/ipban
 
 go 1.20
