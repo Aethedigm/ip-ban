@@ -25,6 +25,8 @@ func IPBan(h http.Handler) http.Handler {
 			http.Error(w, "Forbidden", http.StatusForbidden)
 			panic("IP Banned")
 		}
+
+		h.ServeHTTP(w, r)
 	}
 
 	return http.HandlerFunc(fn)
