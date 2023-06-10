@@ -2,6 +2,7 @@ package ipban
 
 import (
 	"bufio"
+	"log"
 	"net/http"
 	"os"
 	"strings"
@@ -24,7 +25,8 @@ func IPBan(h http.Handler) http.Handler {
 
 		if IPInList(r.RemoteAddr, banList) {
 			http.Error(w, "Forbidden", http.StatusForbidden)
-			panic("IP Banned")
+			log.Println("IP Banned: " + r.RemoteAddr)
+			return
 		}
 
 		h.ServeHTTP(w, r)
