@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"net/http"
 	"os"
+	"strings"
 )
 
 func IPBan(h http.Handler) http.Handler {
@@ -33,8 +34,11 @@ func IPBan(h http.Handler) http.Handler {
 }
 
 func IPInList(ip string, list []string) bool {
+	// Ignore ports
+	ipReal := strings.Split(ip, ":")[0]
+
 	for _, v := range list {
-		if v == ip {
+		if v == ipReal {
 			return true
 		}
 	}
